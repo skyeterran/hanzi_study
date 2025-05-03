@@ -131,10 +131,16 @@ for word, new_score in new_stats["scores"].items():
     print(f"{word}: {total_score} ({change})")
 print()
 
+sorted_scores = sorted(
+    statistics["scores"].items(),
+    key = lambda x : x[1],
+    reverse = True
+)
+
 # Update stats
 with open("statistics.json", "w", encoding = 'utf8') as file:
     json.dump(
-        statistics,
+        {"scores": dict(sorted_scores)},
         file,
         ensure_ascii = False,
         indent = 4
